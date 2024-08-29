@@ -10,6 +10,11 @@
   .flex-between {
     @apply flex justify-between items-center;
   }
+
+}
+
+.cl-providerIcon__github{
+  filter: invert(1);
 }
 
 @layer base {
