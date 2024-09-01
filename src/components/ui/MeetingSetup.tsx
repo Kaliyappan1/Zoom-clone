@@ -1,12 +1,16 @@
 "use client"
 
-import { useCall, VideoPreview } from '@stream-io/video-react-sdk'
+import { DeviceSettings, useCall, VideoPreview } from '@stream-io/video-react-sdk'
 import React, { useEffect, useState } from 'react'
 
 const MeetingSetup = () => {
     const [isMicCamToggledOn, setIsCamToggledOn] = useState(false)
 
     const call = useCall();
+
+    if(!call) {
+        throw new Error('useCall must be used within streamCall component')
+    }
 
     useEffect(() => {
         if (isMicCamToggledOn) {
@@ -25,6 +29,16 @@ const MeetingSetup = () => {
         <div className='flex h-screen w-full flex-col items-center justify-center gap-3 text-white'>
             <h1 className='text-2xl font-bold'>Setup</h1>
             <VideoPreview />
+            <div className='flex h-16 items-center justify-center gap-3'> 
+                <label className='flex items-center justify-center gap-2 font-medium'>
+                    <input type="checkbox"
+                    checked={isMicCamToggledOn}
+                    onChange={(e) => setIsCamToggledOn(e.target.checked)}
+                    />
+                    join with mic and camera off
+                </label>
+                <DeviceSettings/>
+            </div>
         </div>
     )
 }
