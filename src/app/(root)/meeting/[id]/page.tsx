@@ -10,7 +10,7 @@ import Loader from '@/components/ui/Loader';
 
 function Meeting({ params: {id} }: { params: { id: string } }) {
   const {user, isLoaded} = useUser();
-  const [isSetupComplete, setIsSetupCplete] = useState(false);
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
 const {call, isCallLoading} = useGetCallById(id)
 
 if(!isLoaded || isCallLoading) return <Loader/>;
@@ -20,7 +20,10 @@ if(!isLoaded || isCallLoading) return <Loader/>;
       <StreamCall call={call}>
         <StreamTheme>
           {!isSetupComplete ? (
-            <MeetingSetup/>
+            <MeetingSetup 
+            setIsSetupComplete={setIsSetupComplete}
+            
+            />
           ) : (
             <MeetingRoom/>
           )}
