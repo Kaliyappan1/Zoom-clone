@@ -9,6 +9,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk'
 import { useToast } from '../hooks/use-toast'
 import { Textarea } from './textarea'
 import ReactDatePicker from 'react-datepicker'
+import { Input } from './input'
 const MeetingTypeList = () => {
     const router = useRouter()
 
@@ -94,7 +95,7 @@ const MeetingTypeList = () => {
                 img='/icons/recordings.svg'
                 title='View Recordings'
                 description='Check out your recordings'
-                handleClick={() => setMeetingState('isJoiningMeeting')}
+                handleClick={() => router.push('/recordings')}
                 className="bg-purple-1"
             />
             <HomeCard
@@ -160,9 +161,24 @@ const MeetingTypeList = () => {
                 isOpen={meetingState === 'isInstantMeeting'}
                 onClose={() => setMeetingState(undefined)}
                 title="Start an Instant Meeting"
+                className='text-center'
                 buttonText="Start Meeting"
                 handleClick={createMeeting}
             />
+            <MeetingModal
+                isOpen={meetingState === 'isJoiningMeeting'}
+                onClose={() => setMeetingState(undefined)}
+                title="Type the link here"
+                className='text-center'
+                buttonText="Join meeting"
+                handleClick={() => router.push(values.link)}
+            >
+                <Input
+                placeholder='Meeting Link'
+                className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0'
+                onChange={(e) => setValues({...values, link: e.target.value})}
+                />
+            </MeetingModal>
         </section>
     )
 }
