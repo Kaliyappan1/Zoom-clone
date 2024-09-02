@@ -13,6 +13,9 @@
   max-width: 500px;
   position: relative;
 }
+.cl-socialButtonsProviderIcon__github{
+  filter: invert(1);
+}
 
 .str-video__speaker-layout__wrapper {
   max-height: 700px;
